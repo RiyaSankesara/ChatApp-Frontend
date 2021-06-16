@@ -1,0 +1,13 @@
+npm install materialize-css@next
+
+npm install ngx-cookie-service --save
+
+npm install moment --save
+
+////////==================For Database
+
+for connection -> mongo
+db -> test database
+show all database -> show dbs
+use local(dbname) -> swicthed to database
+show collections
