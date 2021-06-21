@@ -14,7 +14,19 @@ export class PostService {
   addPost(body: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/post/add-post`, body);
   }
-  getAllPost() : Observable<any>{
+  getAllPost(): Observable<any> {
     return this.http.get(`${this.baseUrl}/post`);
+  }
+  addLike(body: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/post/add-like`, body);
+  }
+  addComment(postId: any, comment: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/post/add-comment`, {
+      postId, comment
+    });
+  }
+  getPostById(id: any): Observable<any> {
+    console.log(id);
+    return this.http.get(`${this.baseUrl}/post?${id}`);
   }
 }

@@ -11,13 +11,16 @@ import { io } from 'socket.io-client';
 export class PostFormComponent implements OnInit {
   socketHost: any;
   socket: any;
-  postForm: FormGroup;
+  postForm: any;
   constructor(private fb: FormBuilder, private postService: PostService) {
     // this.socketHost = 'http://localhost:3000';
-    this.socket = io('http://localhost:3000');
+    this.socket = io('http://localhost:4000');
   }
 
   ngOnInit(): void {
+   
+    this.socket.on('event', function (data: any) {
+    }.bind(this));
     this.init();
   }
   init() {
@@ -26,9 +29,8 @@ export class PostFormComponent implements OnInit {
     });
   }
   submitPost() {
-    this.postService.addPost(this.postForm.value).subscribe((data) => {
-      console.log(data);
-      this.socket.emit('refresh', { data: 'this is an event test' });
+    this.postService.addPost(this.postForm.value).subscribe(data => {
+      this.socket.emit('refresh', {});
       this.postForm.reset();
     });
   }

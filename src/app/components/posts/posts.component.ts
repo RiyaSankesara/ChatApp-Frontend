@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { PostService } from 'src/app/services/post.service';
+import { io } from 'socket.io-client';
+import * as lodash  from 'lodash';
+import { TokenService } from 'src/app/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -9,16 +13,52 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class PostsComponent implements OnInit {
   posts: any = [];
-  constructor(private postService: PostService) { }
+  socket: any;
+  user:any;
+
+  constructor(private postService: PostService,private tokenService: TokenService,
+    private router: Router
+    ) {
+    this.socket = io('http://localhost:4000');
+  }
 
   ngOnInit(): void {
-    this.postService.getAllPost().subscribe(data => {
-      console.log(data.posts);
-      this.posts = data.posts;
+    this.user = this.tokenService.GetPayload();
+    this.getAllPosts();
+    this.socket.emit('my message', 'Hello there from Angular.');
+
+    this.socket.on('my broadcast', (data: string) => {
+      console.log(data);
+    });
+    this.socket.on('refreshPage', (data: any) => {
+      this.getAllPosts();
     });
   }
-  TimeFromNow(time:any){
+  TimeFromNow(time: any) {
     return moment(time).fromNow();
   }
-
+  getAllPosts() {
+    this.postService.getAllPost().subscribe(data => {
+      this.posts = data.posts;
+    }, err => {
+      if(err.error.token === null){
+        this.tokenService.DeleteToken();
+        this.router.navigate(['']);
+      }
+    });
+  }
+  likePost(post: any) {
+    this.postService.addLike(post).subscribe(data => {
+      this.socket.emit('message', "Hiii");
+      // this.socket.emit('refresh', {});
+    }, err => {
+      console.log(err);
+    })
+  }
+  checkInLikesArray(arr: any, username: any) {
+    return lodash.some(arr, { username: username });
+  }
+  openComponentBox(post: any){
+    this.router.navigate(['post',post._id]);
+  }
 }
