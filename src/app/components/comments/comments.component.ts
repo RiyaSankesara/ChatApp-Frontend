@@ -16,10 +16,11 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   commentForm: FormGroup;
   postId: any;
   commentArray = [];
+  commentDetails: any;
   posts: any;
   constructor(private fb: FormBuilder, private postService: PostService,
     private route: ActivatedRoute) { 
-      this.socket = io('http://localhost:4000');
+     this.socket = io('http://localhost:4000');
     }
 
   ngOnInit(): void {
@@ -43,23 +44,36 @@ export class CommentsComponent implements OnInit, AfterViewInit {
     console.log(this.commentForm.value);
     this.postService.addComment(this.postId,this.commentForm.value.comment).subscribe(
       data=> {
-        this.socket.emit('refresh',{});
+       this.socket.emit('refresh',{});
         this.commentForm.reset();
       }
     )
   }
   getPostById(){
     this.postService.getPostById(this.postId).subscribe(data => {
-      console.log(data.posts[0].comments);
-      this.posts = data.posts[0].post;
-      // this.posts = data.posts[0];
+      console.log(data.data);
+      console.log(data.data.comments);
+     // console.log(data.posts[0].comments);
+      this.posts = data.data.post;
+      this.commentDetails = data.data.comments
+      // const mapped = Object.keys(this.commentDetails).map(key => 
+      //   console.log(this.commentDetails[key]));
 
-      this.commentArray = data.posts[0].comments;
-     // console.log(this.commentArray);
+    
+      // // // // this.posts = data.posts[0];
+      // // // this.commentDetails.push(data.posts)
+      // // // //this.commentArray = data.posts[0].comments;
+      // console.log(this.commentDetails);
     });
   }
   TimeFromNow(time: any) {
     return moment(time).fromNow();
   }
 
+
+}
+export class commentDetail {
+   username: string = "";
+   createdAt: string = "";
+   comment: string= "";
 }

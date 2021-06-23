@@ -25,11 +25,6 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.tokenService.GetPayload();
     this.getAllPosts();
-    this.socket.emit('my message', 'Hello there from Angular.');
-
-    this.socket.on('my broadcast', (data: string) => {
-      console.log(data);
-    });
     this.socket.on('refreshPage', (data: any) => {
       this.getAllPosts();
     });
@@ -49,8 +44,7 @@ export class PostsComponent implements OnInit {
   }
   likePost(post: any) {
     this.postService.addLike(post).subscribe(data => {
-      this.socket.emit('message', "Hiii");
-      // this.socket.emit('refresh', {});
+      this.socket.emit('refresh', {});
     }, err => {
       console.log(err);
     })

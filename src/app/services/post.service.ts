@@ -26,7 +26,6 @@ export class PostService {
     });
   }
   getPostById(id: any): Observable<any> {
-    console.log(id);
-    return this.http.get(`${this.baseUrl}/post?${id}`);
+    return this.http.get(`${this.baseUrl}/postbyid/${id}`);
   }
 }

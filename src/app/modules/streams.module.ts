@@ -11,6 +11,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { CommentsComponent } from '../components/comments/comments.component';
 import { RouterModule } from '@angular/router';
+import { PeopleComponent } from '../components/people/people.component';
+import { UserService } from '../services/user.service';
 
 
 @NgModule({
@@ -20,7 +22,8 @@ import { RouterModule } from '@angular/router';
     SideComponent,
     PostFormComponent,
     PostsComponent,
-    CommentsComponent
+    CommentsComponent,
+    PeopleComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +31,6 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports: [StreamsComponent],
-  providers: [TokenService, PostService, CookieService]
+  providers: [TokenService, PostService, CookieService,UserService]
 })
 export class StreamsModule { }

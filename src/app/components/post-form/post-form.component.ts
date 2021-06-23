@@ -13,14 +13,13 @@ export class PostFormComponent implements OnInit {
   socket: any;
   postForm: any;
   constructor(private fb: FormBuilder, private postService: PostService) {
-    // this.socketHost = 'http://localhost:3000';
-    this.socket = io('http://localhost:4000');
+    //this.socket = io('http://localhost:4000');
   }
 
   ngOnInit(): void {
    
-    this.socket.on('event', function (data: any) {
-    }.bind(this));
+    // this.socket.on('event', function (data: any) {
+    // }.bind(this));
     this.init();
   }
   init() {
