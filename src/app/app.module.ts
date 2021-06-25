@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth.module';
@@ -9,8 +9,12 @@ import { StreamsRoutingModule } from './modules/streams-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenIntercepter } from './services/token-intercepter';
 import { CookieService } from 'ngx-cookie-service';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { FormsModule } from '@angular/forms';
 
 
+
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +25,9 @@ import { CookieService } from 'ngx-cookie-service';
     AuthRoutingModule,
     StreamsModule,
     StreamsRoutingModule,
+    FormsModule,
+    SocketIoModule.forRoot(config)
+   
   ],
   providers: [
     CookieService,

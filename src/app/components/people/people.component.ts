@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 import * as _ from 'lodash';
-import * as io from 'socket.io-client';
+import { io } from 'socket.io-client';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-people',
@@ -10,13 +11,13 @@ import * as io from 'socket.io-client';
   styleUrls: ['./people.component.scss']
 })
 export class PeopleComponent implements OnInit {
-  socket: any;
-  constructor(private userService: UserService, private tokenService: TokenService) { 
-    this.socket = io('http//:localhost:4000');
+  constructor(private userService: UserService, private tokenService: TokenService,
+    private socket: Socket) {
   }
-  users = [];
-  userArray = [];
+  users :any[] = [];;
+  userArray :any[] = [];;
   loggedInUser: any;
+  userDetails = new userDetails();
   ngOnInit(): void {
     this.loggedInUser = this.tokenService.GetPayload();
     this.getUsers();
@@ -30,6 +31,11 @@ export class PeopleComponent implements OnInit {
     this.userService.getAllUsers().subscribe(data => {
       _.remove(data.users, { username: this.loggedInUser.username })
       this.users = data.users;
+      console.log(this.users);
+      this.userDetails._id = data.users.id;
+      this.userDetails.username = data.users.username;
+      console.log(this.userDetails);
+
     });
   }
   getUserById() {
@@ -46,20 +52,23 @@ export class PeopleComponent implements OnInit {
   }
   followUser(user: any) {
     this.userService.followUser(user._id).subscribe(data => {
-    this.socket.emit('refresh', {});
+      this.socket.emit('refresh', {});
       console.log(data);
-     
+
     })
   }
   checkIsFollowing(arr: any, id: any) {
-    const result = _.find(arr,['userFollowed._id',id]);
-    if(result)
-    {
+    const result = _.find(arr, ['userFollowed._id', id]);
+    if (result) {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
 
+}
+class userDetails {
+  username: string = "";
+  _id: string = "";
 }

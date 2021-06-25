@@ -34,22 +34,26 @@
       People<a href="" class="secondary-content">
         <i class="material-icons">people</i>
       </a>
-    </div>
+    </div>  
     </a>
   </li>
-  <li class="collection-item">
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+    <a [routerLink]="['/people','following']">
     <div>
       Following<a href="" class="secondary-content">
         <i class="material-icons">people</i>
       </a>
     </div>
+    </a>
   </li>
-  <li class="collection-item">
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+    <a [routerLink]="['/people','followers']">
     <div>
       Followers<a href="" class="secondary-content">
         <i class="material-icons">people_outline</i>
       </a>
     </div>
+    </a>
   </li>
   <li class="collection-item">
     <div>

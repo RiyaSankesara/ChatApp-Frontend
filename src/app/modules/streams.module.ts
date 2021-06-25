@@ -13,6 +13,8 @@ import { CommentsComponent } from '../components/comments/comments.component';
 import { RouterModule } from '@angular/router';
 import { PeopleComponent } from '../components/people/people.component';
 import { UserService } from '../services/user.service';
+import { FollowingComponent } from '../components/following/following.component';
+import { FollowersComponent } from '../components/followers/followers.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { UserService } from '../services/user.service';
     PostFormComponent,
     PostsComponent,
     CommentsComponent,
-    PeopleComponent
+    PeopleComponent,
+    FollowingComponent,
+    FollowersComponent
   ],
   imports: [
     CommonModule,
