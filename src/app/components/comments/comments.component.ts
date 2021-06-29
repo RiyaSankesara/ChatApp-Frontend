@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import {io} from 'socket.io-client';
 import * as moment from 'moment';  
+import { Socket } from 'ngx-socket-io';
+
 
 @Component({
   selector: 'app-comments',
@@ -12,15 +14,14 @@ import * as moment from 'moment';
 })
 export class CommentsComponent implements OnInit, AfterViewInit {
   toolbarElement: any;
-  socket: any;
   commentForm: FormGroup;
   postId: any;
   commentArray = [];
   commentDetails: any;
   posts: any;
   constructor(private fb: FormBuilder, private postService: PostService,
-    private route: ActivatedRoute) { 
-     this.socket = io('http://localhost:4000');
+    private route: ActivatedRoute,private socket: Socket) { 
+     //this.socket = io('http://localhost:4000');
     }
 
   ngOnInit(): void {

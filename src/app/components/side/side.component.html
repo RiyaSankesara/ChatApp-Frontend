@@ -62,11 +62,13 @@
       </a>
     </div>
   </li>
-  <li class="collection-item">
+  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+    <a [routerLink]="['/notifications']">
     <div>
       Notifications<a href="" class="secondary-content">
         <i class="material-icons">alarm</i>
       </a>
     </div>
+    </a>
   </li>
 </ul>

@@ -14,8 +14,9 @@ import { FormsModule } from '@angular/forms';
 
 
 
-const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 
+const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
+console.log(config);
 @NgModule({
   declarations: [AppComponent],
   imports: [

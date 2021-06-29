@@ -15,6 +15,7 @@ import { PeopleComponent } from '../components/people/people.component';
 import { UserService } from '../services/user.service';
 import { FollowingComponent } from '../components/following/following.component';
 import { FollowersComponent } from '../components/followers/followers.component';
+import { NotificationsComponent } from '../components/notifications/notifications.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { FollowersComponent } from '../components/followers/followers.component'
     CommentsComponent,
     PeopleComponent,
     FollowingComponent,
-    FollowersComponent
+    FollowersComponent,
+    NotificationsComponent
   ],
   imports: [
     CommonModule,

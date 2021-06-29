@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TokenService } from 'src/app/services/token.service';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private fb: FormBuilder,
     private router: Router,
-    private tokenservice: TokenService
+    private tokenservice: TokenService,
+    private socket: Socket
   ) {}
 
   ngOnInit(): void {
     this.init();
+    this.socket.emit('refresh',"Hello Riya");
   }
   init() {
     this.loginForm = this.fb.group({

@@ -5,6 +5,7 @@ import { io } from 'socket.io-client';
 import * as lodash  from 'lodash';
 import { TokenService } from 'src/app/services/token.service';
 import { Router } from '@angular/router';
+import { Socket } from 'ngx-socket-io';
 
 @Component({
   selector: 'app-posts',
@@ -13,13 +14,12 @@ import { Router } from '@angular/router';
 })
 export class PostsComponent implements OnInit {
   posts: any = [];
-  socket: any;
   user:any;
 
   constructor(private postService: PostService,private tokenService: TokenService,
-    private router: Router
+    private router: Router,private socket: Socket
     ) {
-    this.socket = io('http://localhost:4000');
+   // this.socket = io('http://localhost:4000');
   }
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class PostsComponent implements OnInit {
   }
   likePost(post: any) {
     this.postService.addLike(post).subscribe(data => {
-      this.socket.emit('refresh', {});
+      this.socket.emit('refresh',"Hello Riya");
     }, err => {
       console.log(err);
     })
