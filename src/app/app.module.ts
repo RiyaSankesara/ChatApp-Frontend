@@ -12,9 +12,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { FormsModule } from '@angular/forms';
 
-
-
-
 const config: SocketIoConfig = { url: 'http://localhost:4000', options: {} };
 console.log(config);
 @NgModule({

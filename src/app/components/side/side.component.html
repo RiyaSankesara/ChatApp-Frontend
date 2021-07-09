@@ -2,24 +2,27 @@
   <div class="col s12 m4">
     <a>
       <span> Posts </span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userArray">{{userArray.post.length}}</p>
+      <p class="num" *ngIf="!userArray">0</p>
     </a>
   </div>
   <div class="col s12 m4">
-    <a>
+    <a [routerLink]="['/people','following']">
       <span> Following </span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userArray">{{userArray.following.length}}</p>
+      <p class="num" *ngIf="!userArray">0</p>
     </a>
   </div>
   <div class="col s12 m4">
-    <a>
+    <a [routerLink]="['/people','followers']">
       <span> Followers </span>
-      <p class="num">0</p>
+      <p class="num" *ngIf="userArray">{{userArray.followers.length}}</p>
+      <p class="num" *ngIf="!userArray">0</p>
     </a>
   </div>
 </div>
 <ul class="collection with-header">
-  <li class="collection-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+  <li class="collection-item">
     <a [routerLink]="['/streams']">
       <div>
         Streams<a href="" class="secondary-content">
