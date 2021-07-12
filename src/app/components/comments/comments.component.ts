@@ -52,9 +52,7 @@ export class CommentsComponent implements OnInit, AfterViewInit {
   }
   getPostById(){
     this.postService.getPostById(this.postId).subscribe(data => {
-      console.log(data.data);
-      console.log(data.data.comments);
-     // console.log(data.posts[0].comments);
+
       this.posts = data.data.post;
       this.commentDetails = data.data.comments
       // const mapped = Object.keys(this.commentDetails).map(key => 

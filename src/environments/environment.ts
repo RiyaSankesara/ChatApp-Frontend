@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // baseUrl: "http://43.228.96.124:3000/api/chatapp"
-  baseUrl: "http://localhost:4000/api/chatapp"
+  baseUrl: "http://localhost:3000/api/chatapp"
 };
 
 /*
