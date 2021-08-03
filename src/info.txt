@@ -5,6 +5,9 @@ npm install ngx-cookie-service --save    // 1.0.10
 npm install moment --save
 
  npm i lodash --save
+ npm i ngx-auto-scroll
+
+ npm i ng2-emoji-picker
 
 ////////==================For Database
 

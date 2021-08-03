@@ -12,6 +12,7 @@
 }
 .nav-extended{
     background-color: #64b5f6;
+
 }
 .profile-name{
     font-weight: bold;
@@ -64,6 +65,15 @@
     padding: 0px !important;
     font-weight: bold;
 }
-li.dropdown-button.dropdown-trigger {
-    width: 300px;
+// li.dropdown-button.dropdown-trigger {
+//     width: 300px;
+// }
+// li.dropdown-button.dropdown-trigger1 {
+//     width: 300px;
+// }
+ul#dropdown,ul#dropdown1 {
+    width: 300px !important;
+}
+li.dropdown-button{
+    margin-left: 20px !important;
 }

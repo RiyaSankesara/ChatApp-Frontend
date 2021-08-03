@@ -1,10 +1,10 @@
 <nav class="nav-extended">
   <div class="container">
-    <div class="nav-wrapper">
+  <div class="nav-wrapper">
       <a (click)="GotoHome()" class="brand-logo">Chat App</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li class="dropdown-button dropdown-trigger" data-target="dropdown">
-          <i class="fa fa-globe fa-1x badge"></i>
+          <a><i class="fa fa-bell fa-1x badge"></i></a>
           <span class="nav-label-icon" *ngIf="count.length > 0">{{ count.length }}</span>
           <ul id="dropdown" class="dropdown-content col s12 collection">
             <li
@@ -25,6 +25,40 @@
             </p>  
           </ul>
         </li>
+        <li class="dropdown-button dropdown-trigger1" data-target="dropdown1">
+          <a><i class="fa fa-commenting fa-1x badge"></i>
+          <span class="nav-label-icon circle" *ngIf="msgNum > 0">{{ msgNum }}</span></a>
+          <ul id="dropdown1" class="dropdown-content col s12 collection">
+            <li
+              class="collection-item avatar"
+              *ngFor="let chat of chatList" [routerLink]="['/chat',chat.receiverId.username]"
+            >
+              <img src="http://placehold.it/50x50" class="circle" />
+              <span class="title">
+                {{chat.receiverId.username}}
+                <a class="secondary-content">
+                 {{messageDate(chat.msgId.message[chat.msgId.message.length - 1].createdAt)}}
+                </a>
+              </span>
+            <p>
+              {{chat.msgId.message[chat.msgId.message.length - 1].body}}
+              <a class="secondary-content" *ngIf="chat.msgId.message[chat.msgId.message.length - 1].isRead">
+                <i class="material-icons">brightness_1</i>
+               
+              </a>
+              <a class="secondary-content" *ngIf="!chat.msgId.message[chat.msgId.message.length - 1].isRead">
+                <i class="material-icons">panorama_fish_eye</i>
+              </a> 
+            </p>
+            </li>
+            <li *ngIf="notifications.length <= 0">
+              <p class="text">No Notifications</p>
+            </li>
+            <p class="secondary-content">
+              <a class="markAll btn" (click)="markAll()" href="markAll">Mark All As read</a>
+            </p>  
+          </ul>
+        </li>
         <li><a (click)="logout()">Logout</a></li>
       </ul>
     </div>
@@ -33,7 +67,6 @@
         <img class="circle responsive-img" src="http://placehold.it/50x50" />
       </div>
       <h1 class="profile-name">{{ user.username }}</h1>
-      <!-- <p class="user-text">This is a text</p> -->
     </div>
   </div>
 </nav>

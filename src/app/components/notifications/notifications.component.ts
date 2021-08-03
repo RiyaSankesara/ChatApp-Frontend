@@ -22,6 +22,9 @@ export class NotificationsComponent implements OnInit {
   ngOnInit() {
     this.user = this.tokenservice.GetPayload();
     this.getUser(); 
+    this.socket.on('refreshPage',(data : any) => {
+      this.getUser();
+    });
   }
   getUser() {
     // this.userService.getUserByName(this.user._id).subscribe(data => {

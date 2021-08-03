@@ -18,6 +18,7 @@ export class PeopleComponent implements OnInit {
   userArray :any[] = [];;
   loggedInUser: any;
   userDetails = new userDetails();
+  online_Users = [];
   ngOnInit(): void {
     this.loggedInUser = this.tokenService.GetPayload();
     this.getUsers();
@@ -63,6 +64,18 @@ export class PeopleComponent implements OnInit {
       return true;
     }
     else {
+      return false;
+    }
+  }
+  online(event){
+    this.online_Users = event;
+  }
+  checkIfOnline(name){
+    const result = _.indexOf(this.online_Users,name);
+    if(result > -1){
+      return true;
+    }
+    else{
       return false;
     }
   }
