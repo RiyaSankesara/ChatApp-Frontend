@@ -69,9 +69,12 @@
               ></textarea>
             </div>
             <div class="input-field col s1 emojiDiv">
-              <button class="emojiBtn" (click)="Toggled()">
-                😄
-                </button>
+              <button class="emojiBtn"
+                (click)="toggled = !toggled"
+                [(emojiPickerIf)]="toggled"
+                [emojiPickerDirection]="direction"
+                (emojiPickerSelect)="HandleSelection($event)"
+                >😄</button>
               <div
                 class="emoji-content-editable"
                 (emojiPickerCaretEmitter)="HandleCurrentCaret($event)"
@@ -79,16 +82,7 @@
                 [textContent]="content"
                 contenteditable="true"
               ></div>
-              <i
-                class="emoji-toggle-button imgBtn"
-                (click)="toggled = !toggled"
-                [(emojiPickerIf)]="toggled"
-                [emojiPickerPreserveSelection]="false"
-                [emojiPickerDirection]="direction"
-                [emojiPickerAutofocus]="true"
-                (emojiPickerSelect)="HandleSelection($event)"
-                ></i
-              >
+    
             </div>
             <div class="input-field col s1">
               <button class="suffix btn">Send</button>

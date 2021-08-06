@@ -8,6 +8,8 @@ npm install moment --save
  npm i ngx-auto-scroll
 
  npm i ng2-emoji-picker
+npm i ngx-emoji-picker
+ npm i ng2-file-upload@1.3.0
 
 ////////==================For Database
 

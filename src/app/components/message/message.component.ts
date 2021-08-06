@@ -4,7 +4,7 @@ import { MessageService } from 'src/app/services/message.service';
 import { TokenService } from 'src/app/services/token.service';
 import { UserService } from 'src/app/services/user.service';
 import { Socket } from 'ngx-socket-io';
-import { CaretEvent, EmojiEvent, EmojiPickerOptions } from "ng2-emoji-picker";
+import { CaretEvent, EmojiEvent } from "ngx-emoji-picker";
 import _ from 'lodash';
 
 @Component({
@@ -68,19 +68,21 @@ export class MessageComponent implements OnInit, AfterViewInit, OnChanges {
     })
   }
   ngOnChanges(changes: SimpleChanges) {
-    const title = document.querySelector('nameCol');
+    if (this.ReceiverData != null) {
+      const title = document.querySelector('nameCol');
 
-    if (changes.users.currentValue.length > 0) {
-      const result = _.indexOf(changes.users.currentValue, this.Receiver);
-      if (result > -1) {
-        this.isOnline = true;
-        (title as HTMLElement).style.marginTop = '10px';
+      if (changes.users.currentValue.length > 0) {
+        const result = _.indexOf(changes.users.currentValue, this.Receiver);
+        if (result > -1) {
+          this.isOnline = true;
+          (title as HTMLElement).style.marginTop = '10px';
+        }
+        else {
+          this.isOnline = false;
+          (title as HTMLElement).style.marginTop = '20px';
+        }
+        console.log(changes);
       }
-      else {
-        this.isOnline = false;
-        (title as HTMLElement).style.marginTop = '20px';
-      }
-      console.log(changes);
     }
 
   }
